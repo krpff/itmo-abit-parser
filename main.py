@@ -1,12 +1,19 @@
 import requests
 import xlsxwriter
+from random_user_agent.user_agent import UserAgent
+from random_user_agent.params import SoftwareName, OperatingSystem
 
-headers = {
-    "user-agent": "Mozilla/5.0 (Linux; Android 9; Redmi Note 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.99 Mobile Safari/537.36"
-}
+
+software_names = [SoftwareName.CHROME.value]
+operating_systems = [OperatingSystem.WINDOWS.value, OperatingSystem.LINUX.value]
+user_agent_rotator = UserAgent(
+    software_names=software_names, operating_systems=operating_systems, limit=100
+)
 
 
 def itmoparse():
+    headers = {"user-agent": user_agent_rotator.get_random_user_agent()}
+
     dir_info = requests.get(
         "https://abitlk.itmo.ru/api/v1/9e2eee80b266b31c8d65f1dd3992fa26eb8b4c118ca9633550889a8ff2cac429/rating/directions?degree=bachelor",
         headers,
@@ -15,6 +22,7 @@ def itmoparse():
     abiturients = {}
     print("Parsing started")
     for dir in dir_info["result"]["items"]:
+        headers = {"user-agent": user_agent_rotator.get_random_user_agent()}
         dir_list = requests.get(
             f"https://abitlk.itmo.ru/api/v1/rating/bachelor/budget?program_id={dir['isu_id']}&manager_key=&sort=&showLosers=true",
             headers,

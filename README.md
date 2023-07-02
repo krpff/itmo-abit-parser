@@ -6,7 +6,7 @@
 Установите необходимые пакеты при помощи `pip`
 
 ```bash
-pip install requests xlsxwriter
+pip install requests xlsxwriter random_user_agent
 ```
 Запустите `main.py`
 

@@ -41,10 +41,12 @@ def itmoparse():
                     directions[dir["direction_title"]].append(
                         (abit["snils"], abit["case_number"], abit["total_scores"])
                     )
-                id = abit[0] if abit[0] else abit[1]
-                if id not in abiturients.keys():
-                    abiturients[id] = {"score": abit[2], "directions": []}
-                abiturients[id]["directions"].append(dir["direction_title"])
+
+        for abit in directions[dir["direction_title"]]:
+            id = abit[0] if abit[0] else abit[1]
+            if id not in abiturients.keys():
+                abiturients[id] = {"score": abit[2], "directions": []}
+            abiturients[id]["directions"].append(dir["direction_title"])
 
     print("Creating file")
     itmo_abiturients = xlsxwriter.Workbook("itmo_abiturients.xlsx")

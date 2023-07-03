@@ -6,11 +6,8 @@
 Установите необходимые пакеты при помощи `pip`
 
 ```bash
+git clone https://github.com/krpff/itmo-abit-parser.git
 pip install requests xlsxwriter random_user_agent
-```
-Запустите `main.py`
-
-```bash
 python main.py
 ```
 

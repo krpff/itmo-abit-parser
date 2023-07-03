@@ -46,7 +46,6 @@ def itmoparse():
                     abiturients[id] = {"score": abit[2], "directions": []}
                 abiturients[id]["directions"].append(dir["direction_title"])
 
-
     print("Creating file")
     itmo_abiturients = xlsxwriter.Workbook("itmo_abiturients.xlsx")
     worksheet = itmo_abiturients.add_worksheet()
